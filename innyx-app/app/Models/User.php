@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\JWT;
+use App\Models\Product;
 
 
 class User extends Authenticatable implements JWTSubject
@@ -48,6 +49,16 @@ class User extends Authenticatable implements JWTSubject
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Get all of the products for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class, 'user_id', 'id');
     }
 
     public function getJWTIdentifier()
