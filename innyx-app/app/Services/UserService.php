@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Data\AppointmentData;
 use App\Models\User;
+use App\Models\Product;
 
 class UserService
 {

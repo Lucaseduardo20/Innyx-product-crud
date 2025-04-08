@@ -21,6 +21,15 @@ class Product extends Model
     protected $casts = [
         'expires_at' => 'datetime',
     ];
+    /**
+     * Get the user associated with the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function category()
     {
