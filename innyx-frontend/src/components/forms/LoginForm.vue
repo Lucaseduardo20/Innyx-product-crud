@@ -117,7 +117,9 @@ const handleLogin = async () => {
         localStorage.setItem('token', data.token)
 
         toast.success('Login realizado com sucesso!', toastOptions)
-        router.push('/dashboard')
+        setTimeout(() => {
+            router.push('/dashboard')
+        }, 1000)
     } catch (error: any) {
         toast.error(error.data.message || 'Erro ao fazer login', toastOptions)
         console.error('Login error:', error.response)
