@@ -6,4 +6,6 @@
 
 <script setup lang="ts">
 import LoginForm from '@/components/forms/LoginForm.vue'
+import 'vue3-toastify/dist/index.css';
+
 </script>
