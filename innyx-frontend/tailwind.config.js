@@ -7,10 +7,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#7e4997',
-        secondary: '#ffffff',
-        tertiary: '#e5ff91',
-      },
+        primary: '#7e4997',    
+        secondary: '#ffffff',  
+        tertiary: '#e5ff91',   
+        quaternary: '#4a306d', 
+        quinary: '#b388eb',    
+        senary: '#f0e6ff'
+      }
     },
   },
   plugins: [],

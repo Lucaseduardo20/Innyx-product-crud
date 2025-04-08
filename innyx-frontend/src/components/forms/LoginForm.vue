@@ -114,8 +114,6 @@ const handleLogin = async () => {
 
         const data = response.data
         auth.setAuth(data.token, data.user)
-        localStorage.setItem('token', data.token)
-
         toast.success('Login realizado com sucesso!', toastOptions)
         setTimeout(() => {
             router.push('/dashboard')
