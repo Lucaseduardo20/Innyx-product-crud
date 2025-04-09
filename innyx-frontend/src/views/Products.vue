@@ -35,7 +35,7 @@ const handleSave = async (data: any) => {
 
 const handleDelete = async (id: number) => {
     if (confirm('Tem certeza que deseja remover este produto?')) {
-        await store.deleteProduct(id)
+        await store.removeProduct(id)
     }
 }
 
