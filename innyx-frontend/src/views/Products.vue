@@ -6,6 +6,7 @@ import ProductModal from '@/components/products/ProductModal.vue'
 import Pagination from '@/components/shared/Pagination.vue'
 import { useProductStore } from '@/stores/product'
 import type { Product } from '@/types/product'
+import { toast } from 'vue3-toastify'
 
 const store = useProductStore()
 
@@ -28,9 +29,10 @@ const handleSave = async (data: any) => {
     if (selectedProduct.value) {
         await store.updateProduct(selectedProduct.value.id, data)
     } else {
-        await store.addProduct(data)
+        closeModal()
+        toast.success('Produto incluído com sucesso!')
+        await store.addProduct(data);
     }
-    closeModal()
 }
 
 const handleDelete = async (id: number) => {
@@ -54,7 +56,7 @@ const handleView = (product: Product) => {
 
 <template>
     <AppLayout>
-        <div class="px-4 py-6 max-w-3xl mx-auto">
+        <div class="px-4 py-6 mb-12 max-w-3xl mx-auto">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <h1 class="text-xl font-bold dark:text-white">Produtos</h1>
                 <button @click="openModal()"
@@ -65,7 +67,7 @@ const handleView = (product: Product) => {
 
             <div class="mt-4">
                 <input v-model="search" type="text" placeholder="Buscar produtos..."
-                    class="w-full px-3 py-2 border rounded dark:bg-quaternary-800 dark:text-white" />
+                    class="w-full px-3 py-2 border rounded dark:bg-quaternary-800" />
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">

@@ -17,11 +17,10 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Preço</label>
-                    <div class="relative">
-                        <span class="absolute left-3 top-2 text-gray-500">R$</span>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Preço (R$)</label>
+                    <div class="relative flex items-center">
                         <input v-model="formattedPrice" @input="handlePriceInput" @blur="formatPrice" placeholder="0,00"
-                            class="w-full pl-8 p-2 border rounded dark:bg-quaternary-800 text-black" />
+                            class="w-full p-2 border rounded dark:bg-quaternary-800 text-black" />
                     </div>
                     <p v-if="priceError" class="text-red-500 text-sm mt-1">{{ priceError }}</p>
                 </div>
@@ -62,8 +61,10 @@
                     <button type="button" @click="closeModal" class="text-gray-500">
                         Cancelar
                     </button>
-                    <button type="submit" class="bg-primary text-white px-4 py-2 rounded">
-                        Salvar
+                    <button type="submit"
+                        class="bg-primary text-white w-20 h-[32px] rounded flex justify-center items-center">
+                        <Spinner :loading="loading" />
+                        {{ loading ? '' : 'Salvar' }}
                     </button>
                 </div>
             </form>
@@ -76,8 +77,11 @@ import { computed, reactive, ref, watch } from 'vue'
 import type { Product } from '@/types/product'
 import type { Category } from '@/types/category'
 import { useAuthStore } from '@/stores/auth';
+import Spinner from '../shared/Spinner.vue';
+
 
 const emit = defineEmits(['submit', 'close'])
+const loading = ref(false);
 
 const props = defineProps<{
     isOpen: boolean
@@ -117,7 +121,7 @@ watch(
             formattedPrice.value = formatNumberToCurrency(newVal.price)
             form.valid_until = newVal.valid_until || ''
             form.category_id = String(newVal.category_id)
-            imagePreview.value = newVal.image_url || null
+            imagePreview.value = newVal.image || null
         } else {
             resetForm()
         }
@@ -209,6 +213,7 @@ function closeModal() {
 }
 
 function submit() {
+    loading.value = true;
     if (!validateDate()) return
 
     const payload = new FormData()
@@ -222,6 +227,10 @@ function submit() {
         payload.append('image_path', form.image)
     }
 
-    emit('submit', payload)
+    console.log(payload, form.image);
+
+    setTimeout(() => {
+        emit('submit', payload)
+    }, 1500)
 }
 </script>

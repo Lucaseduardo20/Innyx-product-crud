@@ -6,7 +6,7 @@ export interface Product {
   price: number;
   category_id: number,
   valid_until: string,
-  image_url: string,
+  image: string,
 }
 
 export interface ProductPayload {

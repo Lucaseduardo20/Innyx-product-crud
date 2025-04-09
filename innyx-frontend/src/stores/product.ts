@@ -10,6 +10,7 @@ import {
   deleteProduct,
 } from '@/services/product'
 import { getCategories } from '@/services/category'
+import { toast } from 'vue3-toastify'
 
 export const useProductStore = defineStore('product', () => {
   const products = ref<Product[]>([])
@@ -22,7 +23,7 @@ export const useProductStore = defineStore('product', () => {
     total: 0,
   })
 
-  async function fetchProducts(queryParams: Record<string, any> = {}) {
+  async function fetchProducts(queryParams: Record<string, any> = { page: 1, search: '' }) {
     loading.value = true
     try {
       const response = await getProducts(queryParams)
