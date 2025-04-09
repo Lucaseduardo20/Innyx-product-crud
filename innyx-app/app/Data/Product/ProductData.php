@@ -13,7 +13,7 @@ class ProductData extends Data
         public string $description,
         public float $price,
         public string|null $valid_until,
-        public string|null $image_path,
+        public string|null $image,
         public string $category_id,
     ) {}
 }
