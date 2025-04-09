@@ -12,8 +12,8 @@ class ProductData extends Data
         public string $name,
         public string $description,
         public float $price,
+        public string|null $valid_until,
         public string|null $image_path,
-        #[MapInputName('category.name')]
-        public string $category_name,
+        public string $category_id,
     ) {}
 }

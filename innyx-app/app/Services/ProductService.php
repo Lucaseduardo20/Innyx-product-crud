@@ -28,7 +28,14 @@ class ProductService
             $data['image_path'] = $data['image']->store('products', 'public');
         }
 
-        $product = Product::create($data);
+        $product = new Product();
+        $product->user_id = $data['user_id'];
+        $product->name = $data['name'];
+        $product->description = $data['description'] ?? null;
+        $product->price = $data['price'];
+        $product->category_id = $data['category_id'];
+        $product->image = $data['image_path'] ?? null;
+        $product->save();
 
         return ProductData::from($product->load('category'));
     }

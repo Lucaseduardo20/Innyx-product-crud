@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('name', 50);
             $table->string('description', 200)->nullable();
             $table->double('price')->unsigned();
-            $table->date('valid_until');
-            $table->string('image');
+            $table->date('valid_until')->nullable();
+            $table->string('image')->nullable();
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
