@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Services;
+
+use App\Data\CategoryData;
+use App\Models\Category;
+
 class CategoryService
 {
     public function list(): array

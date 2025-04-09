@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Services;
+
 use App\Data\ProductData;
 use App\Models\Product;
 

@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
@@ -10,7 +12,17 @@ Route::post('register', [AuthController::class, 'register']);
 
 Route::middleware('auth:api')->group(function () {
     Route::get('preview', [UserController::class, 'get_preview']);
-    Route::group(['prefix' => 'products'], function () {
-
+    Route::prefix('products')->controller(ProductController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::post('/', 'store');
+        Route::get('{product}', 'show');
+        Route::post('{product}', 'update');
+        Route::delete('{product}', 'destroy');
     });
+
+    Route::prefix('categories')->controller(CategoryController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::post('/', 'store');
+    });
+
 });

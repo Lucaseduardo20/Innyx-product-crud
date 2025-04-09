@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Requests;
-
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreProductRequest extends FormRequest
+class UpdateProductRequest extends FormRequest
 {
     public function rules(): array
     {
