@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Data\CategoryData;
+use App\Data\Category\CategoryData;
 use App\Models\Category;
 
 class CategoryService

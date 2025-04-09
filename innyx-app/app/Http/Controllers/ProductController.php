@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Services\ProductService;
 use App\Requests\StoreProductRequest;
-use App\Data\ProductData;
+use App\Data\Product\ProductData;
+use Illuminate\Http\Request;
 use App\Models\Product;
 
 class ProductController extends Controller
 {
     public function __construct(private ProductService $service) {}
 
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json($this->service->list());
+        return response()->json($this->service->list($request->page));
     }
 
     public function store(StoreProductRequest $request)

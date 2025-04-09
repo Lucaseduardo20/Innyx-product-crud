@@ -2,16 +2,24 @@
 
 namespace App\Services;
 
-use App\Data\ProductData;
+use App\Data\Product\ProductData;
+use App\Data\Product\ProductResponseData;
 use App\Models\Product;
 
 class ProductService
 {
-    public function list(): array
+    public function list(int $page = 1): ProductResponseData
     {
-        return ProductData::collection(
-            Product::with('category')->latest()->paginate(10)
-        )->items();
+        $paginator = Product::with('category')
+            ->latest()
+            ->paginate(perPage: 10, page: $page);
+
+            return new ProductResponseData(
+                products: ProductData::collect($paginator->items()),
+                current_page: $paginator->currentPage(),
+                total: $paginator->total(),
+                last_page: $paginator->lastPage()
+            );
     }
 
     public function store(array $data): ProductData
