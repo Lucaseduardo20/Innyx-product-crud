@@ -28,7 +28,6 @@ export const useProductStore = defineStore('product', () => {
       const response = await getProducts(queryParams)
       const data: ProductResponseList = response.data
       products.value = data.products
-      // Atualiza a paginação com os metadados do response
       pagination.value = {
         current_page: data.current_page,
         last_page: data.last_page,
