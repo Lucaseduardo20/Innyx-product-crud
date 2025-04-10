@@ -77,7 +77,10 @@ watch([currentPage, search], () => {
         <div class="px-4 py-6 max-w-3xl mx-auto">
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
                 <h1 class="text-xl font-bold dark:text-white">Usuários</h1>
-                <button @click="openModal()" class="btn-primary">+ Adicionar Usuário</button>
+                <button @click="openModal()"
+                    class="w-40 bg-primary text-white hover:bg-purple-500 rounded-xl h-8 transition-all">+
+                    Adicionar
+                    Usuário</button>
             </div>
 
             <div class="mt-4">
