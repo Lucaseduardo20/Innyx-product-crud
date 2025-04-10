@@ -8,11 +8,19 @@ use App\Models\Product;
 
 class ProductService
 {
-    public function list(int $page = 1): ProductResponseData
+    public function list(int $page = 1, ?string $search = ''): ProductResponseData
     {
-        $paginator = Product::with('category')
-            ->latest()
-            ->paginate(perPage: 10, page: $page);
+        $query = Product::with('category')
+            ->latest();
+
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%')
+                  ->orWhere('description', 'like', '%' . $search . '%');
+            });
+        }
+
+        $paginator = $query->paginate(perPage: 10, page: $page);
 
         $productsData = collect($paginator->items())
             ->map(fn ($product) => ProductData::fromModel($product))
@@ -25,6 +33,7 @@ class ProductService
             last_page: $paginator->lastPage()
         );
     }
+
 
 
     public function store(array $data): ProductData
@@ -41,7 +50,7 @@ class ProductService
         $product->description = $data['description'] ?? null;
         $product->price = $data['price'];
         $product->category_id = $data['category_id'];
-        $product->image = $data['image'] ?? null;
+        $product->image = $data[''] ?? null;
         $product->valid_until = $data['valid_until'] ?? null;
         $product->save();
 
