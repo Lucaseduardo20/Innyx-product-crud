@@ -74,7 +74,7 @@ watch([currentPage, search], () => {
 
 <template>
     <AppLayout>
-        <div class="px-4 py-6 max-w-3xl mx-auto">
+        <div class="px-4 py-6 mb-12 max-w-3xl mx-auto">
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
                 <h1 class="text-xl font-bold dark:text-white">Usuários</h1>
                 <button @click="openModal()"

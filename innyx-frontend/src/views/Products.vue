@@ -9,8 +9,11 @@ import type { Product } from '@/types/product'
 import { toast } from 'vue3-toastify'
 import DeleteProductModal from '@/components/products/DeleteProductModal.vue'
 import ProductViewModal from '@/components/products/ProductViewModal.vue'
+import { useAuthStore } from '@/stores/auth'
+import CategoryModal from '@/components/categories/CategoryModal.vue'
 
 const store = useProductStore()
+const auth = useAuthStore();
 
 const isModalOpen = ref(false)
 const selectedProduct = ref<Product | null>(null)
@@ -20,6 +23,7 @@ const deletingProduct = ref<Product | null>(null);
 const deleteModalTrigger = ref<boolean>(false);
 const viewingProduct = ref<Product | null>(null);
 const viewingModalTrigger = ref<boolean>(false);
+const categoryModal = ref<boolean>(false);
 
 const openModal = (product = null) => {
     selectedProduct.value = product
@@ -91,16 +95,28 @@ const cancelDelete = () => {
     deleteModalTrigger.value = false;
     deletingProduct.value = null;
 }
+
+const addCategoryModal = () => {
+    categoryModal.value = true;
+}
+
+const categoriesClose = () => {
+    categoryModal.value = false;
+}
 </script>
 
 <template>
     <AppLayout>
         <div class="px-4 py-6 mb-12 max-w-3xl mx-auto">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <h1 class="text-xl font-bold dark:text-white">Produtos</h1>
-                <button @click="openModal()"
+                <button v-if="!auth.user?.is_admin" @click="openModal()"
                     class="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark transition btn-primary">
                     + Adicionar Produto
+                </button>
+
+                <button v-else @click="addCategoryModal()"
+                    class="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark transition btn-primary">
+                    Categorias
                 </button>
             </div>
 
@@ -125,5 +141,6 @@ const cancelDelete = () => {
             :product="deletingProduct as Product" />
 
         <ProductViewModal @close="closeViewModal" :open="viewingModalTrigger" :product="viewingProduct as Product" />
+        <CategoryModal @close="categoriesClose" :is-open="categoryModal" />
     </AppLayout>
 </template>
