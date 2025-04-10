@@ -18,15 +18,17 @@ class UserService
 
         $data['products'] = Product::where('user_id', $user->id)->count();
 
+        if ($user->is_admin) {
+            $data['products'] = Product::query()->count();
+            $data['users'] = User::count();
+        }
+
         $lastUpdatedProduct = Product::where('user_id', $user->id)
             ->orderByDesc('updated_at')
             ->first();
 
         $data['last_updated'] = $lastUpdatedProduct?->updated_at?->format('d/m/Y H:i') ?? 'Sem registros';
 
-        if ($user->is_admin) {
-            $data['users'] = User::count();
-        }
 
         return $data;
     }
