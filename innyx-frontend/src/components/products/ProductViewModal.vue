@@ -22,10 +22,15 @@
                 <p class="text-gray-600  leading-relaxed">
                     {{ product.description || 'Sem descrição disponível.' }}
                 </p>
-
                 <div class="flex items-center gap-2 mt-2">
                     <span class="text-green-600 font-semibold text-lg">
                         R$ {{ product.price.toFixed(2) }}
+                    </span>
+                </div>
+
+                <div v-if="auth.user?.is_admin" class="flex items-center gap-2 mt-2">
+                    <span class="text-primary font-semibold text-lg">
+                        Produtor: {{ product.user_name }}
                     </span>
                 </div>
 
@@ -51,12 +56,15 @@
 </template>
 
 <script setup lang="ts">
+import { useAuthStore } from '@/stores/auth';
 import type { Product } from '@/types/product'
 
 const props = defineProps<{
     open: boolean
     product: Product
 }>()
+
+const auth = useAuthStore();
 
 defineEmits(['close'])
 
@@ -77,12 +85,4 @@ const formatDate = (dateStr: string) => {
 }
 </script>
 
-<style scoped>
-.text-primary {
-    @apply text-blue-600;
-}
-
-.bg-primary {
-    @apply bg-blue-600;
-}
-</style>
+<style scoped></style>

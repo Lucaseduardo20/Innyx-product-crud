@@ -76,7 +76,7 @@ watch([currentPage, search], () => {
     <AppLayout>
         <div class="px-4 py-6 mb-12 max-w-3xl mx-auto">
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                <h1 class="text-xl font-bold dark:text-white">Usuários</h1>
+                <h1 class="text-xl font-bold text-purple-900">Usuários</h1>
                 <button @click="openModal()"
                     class="w-40 bg-primary text-white hover:bg-purple-500 rounded-xl h-8 transition-all">+
                     Adicionar

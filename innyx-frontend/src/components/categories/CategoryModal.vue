@@ -20,11 +20,12 @@
 
             <div class="max-h-64 overflow-y-auto pr-1 space-y-2 scroll-smooth">
                 <div v-for="category in categories" :key="category.id"
-                    class="flex justify-between items-center bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2">
+                    class="flex justify-between items-center bg-purple-500  rounded-lg px-3 py-2">
                     <span class="text-zinc-800 dark:text-white text-sm truncate">{{ category.name }}</span>
                     <button @click="handleDeleteCategory(category.id)"
-                        class="text-red-500 text-sm hover:underline disabled:opacity-50" :disabled="loading">
-                        Deletar
+                        class="w-6 bg-red-500 transition-all rounded-lg text-white text-sm hover:bg-red-600 disabled:opacity-50"
+                        :disabled="loading">
+                        🗑️
                     </button>
                 </div>
             </div>
@@ -51,9 +52,7 @@ const store = useCategoryStore()
 const categories = computed(() => store.categories)
 
 const loadCategories = async () => {
-    loading.value = true
     await store.fetchCategories()
-    loading.value = false
 }
 
 const handleCreateCategory = async () => {
@@ -73,10 +72,12 @@ const handleCreateCategory = async () => {
 }
 
 const handleDeleteCategory = async (id: number) => {
-    loading.value = true
-    await store.removeCategory(id)
+    const response = await store.removeCategory(id)
+    if (response.status !== 200) {
+        toast.error('Erro ao deletar categoria!')
+    }
+    toast.info('Categoria deletada com sucesso!')
     await loadCategories()
-    loading.value = false
 }
 
 onMounted(() => {
@@ -85,7 +86,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Estilo para scroll suave */
 ::-webkit-scrollbar {
     width: 6px;
 }

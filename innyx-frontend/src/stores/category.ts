@@ -11,7 +11,9 @@ export const useCategoryStore = defineStore('category', {
 
     actions: {
         async fetchCategories() {
-            return await getCategories();
+            const response = await getCategories();
+            this.categories = response.data;
+            return response.data;
         },
         async storeCategory(name: string) {
             return await setCategories(name);

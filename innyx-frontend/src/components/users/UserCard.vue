@@ -7,7 +7,7 @@ console.log(props.user);
 </script>
 
 <template>
-    <div class="border rounded-xl p-4 shadow-sm bg-tertiary">
+    <div class="border rounded-xl p-4 shadow-sm bg-purple-300">
         <div class="font-semibold">{{ user.name }}</div>
         <div class="text-sm text-gray-600">{{ user.email }}</div>
         <div class="text-sm text-gray-500">Perfil: {{ user.role_name }}</div>

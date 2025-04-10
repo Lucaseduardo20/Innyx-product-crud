@@ -24,6 +24,11 @@
                 R$ {{ product.price.toFixed(2) }}
             </p>
 
+            <p v-if="auth.user?.is_admin" class="text-base text-primary font-semibold mt-3">
+                Produtor: {{ product.user_name }}
+            </p>
+
+
             <div class="flex flex-wrap gap-2 mt-4">
                 <button @click="$emit('edit', product)"
                     class="flex-1 py-2 px-3 rounded-lg bg-primary text-white text-sm font-medium hover:bg-[#a96ec6] focus:outline-none focus:ring-2 focus:ring-blue-300 transition">
@@ -45,6 +50,7 @@
 </template>
 
 <script setup lang="ts">
+import { useAuthStore } from '@/stores/auth';
 import type { Product } from '@/types/product'
 import { ref } from 'vue'
 
@@ -55,6 +61,7 @@ defineProps<{
 defineEmits(['edit', 'delete', 'view'])
 
 const hasError = ref(false)
+const auth = useAuthStore();
 
 const getImageUrl = (path: string) => {
     if (hasError.value) return ''

@@ -7,7 +7,7 @@ export const getCategories = async () => {
 }
 
 export const setCategories = async (name: string) => {
-    return await api.post('/categories', name).then((res) => {
+    return await api.post('/categories', { name }).then((res) => {
         return res
     }).catch((err) => err)
 }

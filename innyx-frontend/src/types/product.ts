@@ -8,6 +8,7 @@ export interface Product {
   category_name?: string,
   valid_until: string,
   image: string,
+  user_name?: string
 }
 
 export interface ProductPayload {
