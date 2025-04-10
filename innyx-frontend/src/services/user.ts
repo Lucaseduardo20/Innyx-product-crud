@@ -2,7 +2,7 @@ import { api } from './api'
 import type { User } from '@/types/user'
 
 interface PaginatedUserResponse {
-    users: User[]
+    items: User[]
     current_page: number
     total: number
     last_page: number

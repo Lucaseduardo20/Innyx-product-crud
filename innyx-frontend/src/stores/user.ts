@@ -15,7 +15,7 @@ export const useUserStore = defineStore('user', {
   actions: {
     async fetchUsers({ page = 1, search = '' }) {
       const response = await getUsers(page, search)
-      this.users = response.users
+      this.users = response.items
       this.pagination = {
         current_page: response.current_page,
         total: response.total,
