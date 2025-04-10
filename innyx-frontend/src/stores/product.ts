@@ -6,8 +6,8 @@ import {
   getProducts,
   getProductById,
   createProduct,
-  updateProduct,
   deleteProduct,
+  updateProductService,
 } from '@/services/product'
 import { getCategories } from '@/services/category'
 import { toast } from 'vue3-toastify'
@@ -57,7 +57,7 @@ export const useProductStore = defineStore('product', () => {
   }
 
   async function updateProduct(id: number, payload: FormData) {
-    const response: any = await updateProduct(id, payload)
+    const response: any = await updateProductService(id, payload)
     await fetchProducts()
     return response.data
   }

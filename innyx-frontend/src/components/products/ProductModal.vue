@@ -115,12 +115,12 @@ watch(
     () => props.initialData,
     (newVal) => {
         if (newVal) {
-            form.name = newVal.name
-            form.description = newVal.description
-            form.price = newVal.price
-            formattedPrice.value = formatNumberToCurrency(newVal.price)
+            form.name = newVal.name || ''
+            form.description = newVal.description || ''
+            form.price = newVal.price || 0
+            formattedPrice.value = formatNumberToCurrency(newVal.price || 0)
             form.valid_until = newVal.valid_until || ''
-            form.category_id = String(newVal.category_id)
+            form.category_id = String(newVal.category_id || '')
             imagePreview.value = newVal.image || null
         } else {
             resetForm()
@@ -128,6 +128,7 @@ watch(
     },
     { immediate: true }
 )
+
 
 function resetForm() {
     form.name = ''
@@ -213,24 +214,34 @@ function closeModal() {
 }
 
 function submit() {
-    loading.value = true;
-    if (!validateDate()) return
+    if (!validateDate()) return;
 
-    const payload = new FormData()
-    payload.append('name', form.name)
-    payload.append('description', form.description)
-    payload.append('price', form.price.toString())
-    payload.append('valid_until', form.valid_until)
-    payload.append('category_id', form.category_id)
-    payload.append('user_id', auth.user?.id)
+    loading.value = true;
+
+    const payload = new FormData();
+    payload.append('name', form.name);
+    payload.append('description', form.description);
+    payload.append('price', form.price.toString());
+    payload.append('valid_until', form.valid_until);
+    payload.append('category_id', form.category_id);
+    payload.append('user_id', auth.user?.id);
+
     if (form.image) {
-        payload.append('image_path', form.image)
+        payload.append('image_path', form.image);
     }
 
-    console.log(payload, form.image);
+    const isEdit = isEditing.value;
+    const productId = props.initialData?.id || null;
 
     setTimeout(() => {
-        emit('submit', payload)
-    }, 1500)
+        emit('submit', {
+            payload,
+            isEdit,
+            id: productId,
+        });
+        loading.value = false;
+        closeModal();
+    }, 1500);
 }
+
 </script>

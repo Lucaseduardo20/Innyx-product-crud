@@ -29,15 +29,30 @@ const closeModal = () => {
     isModalOpen.value = false
 }
 
-const handleSave = async (data: any) => {
-    if (selectedProduct.value) {
-        await store.updateProduct(selectedProduct.value.id, data)
+const handleSave = async ({ payload, isEdit, id }: any) => {
+    console.log(selectedProduct.value);
+    if (isEdit && id) {
+        return await store.updateProduct(id, payload).then((res) => {
+            toast.success('Produto atualizado com sucesso!')
+            closeModal()
+        }).catch((error) => {
+            toast.error('Erro ao atualizar o produto!')
+            closeModal();
+        })
+
     } else {
         closeModal()
         toast.success('Produto incluído com sucesso!')
-        await store.addProduct(data);
+        await store.addProduct(payload).then((res) => {
+            toast.success('Produto incluído com sucesso!')
+            closeModal()
+        }).catch((error) => {
+            toast.error('Erro ao adicionar o produto!')
+            closeModal();
+        })
     }
 }
+
 
 const openDeletingModal = async (product: Product) => {
     deleteModalTrigger.value = true;

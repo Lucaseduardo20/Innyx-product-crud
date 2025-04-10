@@ -17,8 +17,8 @@ export function createProduct(data: FormData) {
     })
 }
 
-export function updateProduct(id: number, data: FormData) {
-    return api.post(`/products/${id}?_method=PUT`, data, {
+export function updateProductService(id: number, data: FormData) {
+    return api.post(`/products/${id}`, data, {
         headers: {
             'Content-Type': 'multipart/form-data',
         },
