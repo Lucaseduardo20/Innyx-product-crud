@@ -14,13 +14,18 @@ class ProductService
             ->latest()
             ->paginate(perPage: 10, page: $page);
 
-            return new ProductResponseData(
-                products: ProductData::collect($paginator->items()),
-                current_page: $paginator->currentPage(),
-                total: $paginator->total(),
-                last_page: $paginator->lastPage()
-            );
+        $productsData = collect($paginator->items())
+            ->map(fn ($product) => ProductData::fromModel($product))
+            ->all();
+
+        return new ProductResponseData(
+            products: $productsData,
+            current_page: $paginator->currentPage(),
+            total: $paginator->total(),
+            last_page: $paginator->lastPage()
+        );
     }
+
 
     public function store(array $data): ProductData
     {
@@ -50,7 +55,6 @@ class ProductService
             $data['image_path'] = "storage/{$path}";
         }
 
-        logger('data', [$data]);
         $product->update($data);
 
         return ProductData::from($product->load('category'));
