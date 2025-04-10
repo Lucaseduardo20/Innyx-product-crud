@@ -12,6 +12,7 @@ class UserData extends Data
         public string $name,
         public string $email,
         public ?int $role_id,
+        public ?string $role_name,
         public ?bool $is_admin
     ) {}
 
@@ -22,6 +23,7 @@ class UserData extends Data
             name: $user->name,
             email: $user->email,
             role_id: null,
+            role_name: $user->role->name,
             is_admin: $user->is_admin
         );
     }

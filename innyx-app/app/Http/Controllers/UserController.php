@@ -21,4 +21,30 @@ class UserController extends Controller
     {
         return response()->json($this->service->preview($request->user()), 200);
     }
+
+    public function index(Request $request): JsonResponse
+    {
+        $page = $request->integer('page', 1);
+        $search = $request->string('search', '');
+        $data = $$this->service->list($page, $search);
+        return response()->json($data);
+    }
+
+    public function store(StoreUserRequest $request): JsonResponse
+    {
+        $user = $$this->service->create($request->validated());
+        return response()->json(UserData::fromModel($user));
+    }
+
+    public function update(UpdateUserRequest $request, User $user): JsonResponse
+    {
+        $updatedUser = $$this->service->update($user, $request->validated());
+        return response()->json(UserData::fromModel($updatedUser));
+    }
+
+    public function destroy(User $user): JsonResponse
+    {
+        $$this->service->delete($user);
+        return response()->json([], 204);
+    }
 }

@@ -25,4 +25,11 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/', 'store');
     });
 
+    Route::prefix('users')->middleware(['auth:api'])->group(function () {
+        Route::get('/', [UserController::class, 'index']);
+        Route::post('/', [UserController::class, 'store']);
+        Route::put('/{user}', [UserController::class, 'update']);
+        Route::delete('/{user}', [UserController::class, 'destroy']);
+    });
+
 });

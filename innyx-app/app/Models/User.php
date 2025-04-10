@@ -11,6 +11,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\JWT;
 use App\Models\Product;
+use App\Models\Role;
 
 
 class User extends Authenticatable implements JWTSubject
@@ -60,6 +61,17 @@ class User extends Authenticatable implements JWTSubject
     public function products(): HasMany
     {
         return $this->hasMany(Product::class, 'user_id', 'id');
+    }
+
+    /**
+     * Get role of user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
 
     public function getJWTIdentifier()
