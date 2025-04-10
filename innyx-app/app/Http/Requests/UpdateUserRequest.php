@@ -16,7 +16,7 @@ class UpdateUserRequest extends FormRequest
                 'email',
                 Rule::unique('users', 'email')->ignore($this->user->id)
             ],
-            'role_id' => ['nullable', 'exists:roles,id']
+            'role_name' => ['nullable', 'exists:roles,name']
         ];
     }
 
