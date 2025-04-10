@@ -9,11 +9,16 @@ class CategoryService
 {
     public function list(): array
     {
-        return CategoryData::collection(Category::all())->items();
+        return CategoryData::collect(Category::all())->toArray();
     }
 
     public function store(array $data): CategoryData
     {
         return CategoryData::from(Category::create($data));
+    }
+
+    public function delete(int $id)
+    {
+        return Category::find($id)->delete();
     }
 }

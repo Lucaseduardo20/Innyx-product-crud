@@ -1,7 +1,11 @@
 <?php
 
+namespace App\Http\Controllers;
+
 use App\Services\CategoryService;
-use App\Requests\StoreCategoryRequest;
+use App\Http\Requests\StoreCategoryRequest;
+use Illuminate\Http\Request;
+
 
 class CategoryController extends Controller
 {
@@ -15,5 +19,10 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         return response()->json($this->service->store($request->validated()));
+    }
+
+    public function destroy(Request $request)
+    {
+        return response()->json($this->service->delete($request->id));
     }
 }

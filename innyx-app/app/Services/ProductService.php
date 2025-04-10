@@ -10,10 +10,10 @@ class ProductService
 {
     public function list(int $page = 1, ?string $search = ''): ProductResponseData
     {
-        // $query = Product::with('category')
-        //     ->latest();
         $query = auth()->user()->products()->with('category')->latest();
-
+        if(auth()->user()->is_admin) {
+            $query = Product::query()->with('category')->latest();
+        }
         if (!empty($search)) {
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', '%' . $search . '%')
@@ -80,3 +80,4 @@ class ProductService
         return ProductData::from($product->load('category'));
     }
 }
+

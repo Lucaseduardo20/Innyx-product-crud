@@ -16,7 +16,8 @@ class ProductData extends Data
         public string|null $valid_until,
         public string|null $image,
         public string $category_id,
-        public ?string $category_name
+        public ?string $category_name,
+        public string|null $user_name
     ) {}
 
     public static function fromModel(Product $product): self
@@ -30,6 +31,7 @@ class ProductData extends Data
             valid_until: $product->valid_until,
             category_id: $product->category->id,
             category_name: $product->category->name,
+            user_name: auth()->user()->is_admin ? $product->user->name : null
         );
     }
 }

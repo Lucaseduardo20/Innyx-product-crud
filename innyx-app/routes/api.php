@@ -23,6 +23,7 @@ Route::middleware('auth:api')->group(function () {
     Route::prefix('categories')->controller(CategoryController::class)->group(function () {
         Route::get('/', 'index');
         Route::post('/', 'store');
+        Route::delete('/{id}', 'destroy');
     });
 
     Route::prefix('users')->middleware(['auth:api'])->group(function () {
