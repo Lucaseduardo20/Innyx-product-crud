@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Data\Auth\LoginData;
+use App\Data\Auth\UserData;
 use App\Data\Auth\RegisterData;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -21,7 +22,7 @@ class AuthController extends Controller
 
         return response()->json([
             'token' => $token,
-            'user' => auth()->user(),
+            'user' => UserData::from(auth()->user()),
         ]);
     }
 
