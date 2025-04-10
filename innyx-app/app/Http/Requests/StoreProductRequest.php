@@ -15,7 +15,7 @@ class StoreProductRequest extends FormRequest
             'price' => ['required', 'numeric'],
             'valid_until' => ['nullable','date'],
             'category_id' => ['required', 'exists:categories,id'],
-            'image_path' => ['nullable', 'image', 'max:2048'],
+            'image' => ['nullable', 'image', 'max:2048'],
         ];
     }
 

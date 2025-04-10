@@ -29,9 +29,9 @@ class ProductService
 
     public function store(array $data): ProductData
     {
-        if (isset($data['image_path'])) {
-            $path = $data['image_path']->store('products', 'public');
-            $data['image_path'] = "storage/{$path}";
+        if (isset($data['image'])) {
+            $path = $data['image']->store('products', 'public');
+            $data['image'] = "storage/{$path}";
         }
 
 
@@ -41,7 +41,7 @@ class ProductService
         $product->description = $data['description'] ?? null;
         $product->price = $data['price'];
         $product->category_id = $data['category_id'];
-        $product->image = $data['image_path'] ?? null;
+        $product->image = $data['image'] ?? null;
         $product->valid_until = $data['valid_until'] ?? null;
         $product->save();
 
@@ -52,7 +52,7 @@ class ProductService
     {
         if (isset($data['image'])) {
             $path = $data['image']->store('products', 'public');
-            $data['image_path'] = "storage/{$path}";
+            $data['image'] = "storage/{$path}";
         }
 
         $product->update($data);
