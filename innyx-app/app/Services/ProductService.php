@@ -37,7 +37,7 @@ class ProductService
         $product->price = $data['price'];
         $product->category_id = $data['category_id'];
         $product->image = $data['image_path'] ?? null;
-        logger('image', [$data['image_path']]);
+        $product->valid_until = $data['valid_until'] ?? null;
         $product->save();
 
         return ProductData::from($product->load('category'));
@@ -50,6 +50,7 @@ class ProductService
             $data['image_path'] = "storage/{$path}";
         }
 
+        logger('data', [$data]);
         $product->update($data);
 
         return ProductData::from($product->load('category'));

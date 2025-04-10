@@ -15,7 +15,8 @@ class Product extends Model
         'price',
         'expires_at',
         'image',
-        'category_id'
+        'category_id',
+        'valid_until'
     ];
 
     protected $casts = [
