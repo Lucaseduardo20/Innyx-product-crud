@@ -2,7 +2,6 @@
     <div
         class="max-w-sm w-full sm:w-80 bg-white dark:bg-quaternary-800 rounded-2xl shadow-md overflow-hidden border dark:border-quaternary-700 transition-all hover:shadow-lg">
 
-        <!-- Imagem do produto com fallback -->
         <div class="w-full aspect-video bg-gray-100 dark:bg-quaternary-700">
             <img v-if="product.image" :src="getImageUrl(product.image)" alt="Imagem do produto"
                 class="w-full h-full object-cover" @error="onImageError" />
@@ -31,7 +30,7 @@
                     ✏️ Editar
                 </button>
 
-                <button @click="$emit('delete', product.id)"
+                <button @click="$emit('delete', product)"
                     class="flex-1 py-2 px-3 rounded-lg bg-red-600 text-white text-sm font-medium hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-300 transition">
                     🗑️ Excluir
                 </button>

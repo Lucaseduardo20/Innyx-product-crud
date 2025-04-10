@@ -14,7 +14,7 @@ defineProps<{
     loading: boolean
 }>();
 </script>
-<style>
+<style scoped>
 @keyframes spin {
     from {
         transform: rotate(0deg);
