@@ -9,6 +9,7 @@ import type { Product } from '@/types/product'
 import { toast } from 'vue3-toastify'
 import DeleteProductModal from '@/components/products/DeleteProductModal.vue'
 import { deleteProduct } from '@/services/product'
+import ProductViewModal from '@/components/products/ProductViewModal.vue'
 
 const store = useProductStore()
 
@@ -18,6 +19,8 @@ const currentPage = ref(1)
 const search = ref('')
 const deletingProduct = ref<Product | null>(null);
 const deleteModalTrigger = ref<boolean>(false);
+const viewingProduct = ref<Product | null>(null);
+const viewingModalTrigger = ref<boolean>(false);
 
 const openModal = (product = null) => {
     selectedProduct.value = product
@@ -68,7 +71,13 @@ watch([currentPage, search], () => {
 })
 
 const handleView = (product: Product) => {
-    window.alert(`Ver mais: ${product.name}`)
+    viewingProduct.value = product;
+    viewingModalTrigger.value = true;
+}
+
+const closeViewModal = () => {
+    viewingProduct.value = null;
+    viewingModalTrigger.value = false;
 }
 
 const confirmDelete = async (id: number) => {
@@ -84,6 +93,7 @@ const cancelDelete = () => {
     deleteModalTrigger.value = false;
     deletingProduct.value = null;
 }
+
 </script>
 
 <template>
@@ -116,5 +126,7 @@ const cancelDelete = () => {
 
         <DeleteProductModal @cancel="cancelDelete" @confirm="confirmDelete" :open="deleteModalTrigger"
             :product="deletingProduct as Product" />
+
+        <ProductViewModal @close="closeViewModal" :open="viewingModalTrigger" :product="viewingProduct as Product" />
     </AppLayout>
 </template>
