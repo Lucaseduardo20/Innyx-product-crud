@@ -38,10 +38,6 @@
                     </label>
                     <input type="file" accept="image/*" @change="onFileChange"
                         class="block w-full text-sm text-gray-900 text-black file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/80" />
-                    <div v-if="imagePreview" class="mt-2">
-                        <img :src="imagePreview" alt="Prévia da imagem"
-                            class="w-full h-48 object-cover rounded-lg border" />
-                    </div>
                 </div>
 
                 <div>
@@ -227,7 +223,7 @@ function submit() {
     payload.append('user_id', auth.user?.id);
 
     if (form.image) {
-        payload.append('image_path', form.image);
+        payload.append('image', form.image);
     }
 
     const isEdit = isEditing.value;

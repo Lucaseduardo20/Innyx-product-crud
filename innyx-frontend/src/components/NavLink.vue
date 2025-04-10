@@ -1,4 +1,3 @@
-<!-- src/components/NavLink.vue -->
 <template>
     <router-link :to="to" class="flex items-center space-x-3 p-3 rounded-lg transition-all duration-200"
         :class="classes">
@@ -26,6 +25,6 @@ const classes = computed(() => {
     if (isActive) {
         return 'bg-primary bg-opacity-10 text-primary dark:bg-quinary dark:bg-opacity-20 dark:text-quinary'
     }
-    return 'text-quaternary-600 hover:bg-senary dark:text-quinary-300 dark:hover:bg-quaternary-700'
+    return 'text-tertiary text-bold hover:bg-senary'
 })
 </script>

@@ -1,7 +1,5 @@
-<!-- src/layouts/AppLayout.vue -->
 <template>
     <div class="min-h-screen bg-senary-50 dark:bg-quaternary-900">
-        <!-- Sidebar Desktop -->
         <aside class="hidden sm:flex fixed left-0 top-0 h-full w-64 bg-[#1f1231] shadow-lg flex-col z-20">
             <div class="p-6 flex justify-center">
                 <Logo class="h-10" />
@@ -20,7 +18,6 @@
             </div>
         </aside>
 
-        <!-- Main content -->
         <div class="sm:ml-64">
             <header class="bg-secondary dark:bg-quaternary shadow-md p-4 sticky top-0 z-10">
                 <div class="flex justify-between items-center max-w-5xl mx-auto">
@@ -40,12 +37,10 @@
                 <div class="w-full flex justify-center sm:hidden">
                     <SLogo />
                 </div>
-                <!-- Slot onde cada view será injetada -->
                 <slot />
             </main>
         </div>
 
-        <!-- Mobile nav -->
         <nav
             class="fixed bottom-0 left-0 right-0 bg-[#1f1231] shadow-inner border-t dark:border-quaternary-700 sm:hidden">
             <div class="flex justify-around items-center p-2">

@@ -26,7 +26,7 @@
 
             <div class="flex flex-wrap gap-2 mt-4">
                 <button @click="$emit('edit', product)"
-                    class="flex-1 py-2 px-3 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 transition">
+                    class="flex-1 py-2 px-3 rounded-lg bg-primary text-white text-sm font-medium hover:bg-[#a96ec6] focus:outline-none focus:ring-2 focus:ring-blue-300 transition">
                     ✏️ Editar
                 </button>
 
