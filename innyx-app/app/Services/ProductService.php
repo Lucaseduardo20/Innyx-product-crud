@@ -50,7 +50,7 @@ class ProductService
         $product->description = $data['description'] ?? null;
         $product->price = $data['price'];
         $product->category_id = $data['category_id'];
-        $product->image = $data[''] ?? null;
+        $product->image = $data['image'] ?? null;
         $product->valid_until = $data['valid_until'] ?? null;
         $product->save();
 
