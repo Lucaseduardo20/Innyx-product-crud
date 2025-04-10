@@ -25,6 +25,6 @@ const classes = computed(() => {
     if (isActive) {
         return 'bg-primary bg-opacity-10 text-primary dark:bg-quinary dark:bg-opacity-20 dark:text-quinary'
     }
-    return 'text-tertiary text-bold hover:bg-senary'
+    return 'text-tertiary text-bold hover:bg-primary'
 })
 </script>
