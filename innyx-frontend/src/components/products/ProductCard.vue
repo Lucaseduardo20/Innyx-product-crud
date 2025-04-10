@@ -12,7 +12,7 @@
         </div>
 
         <div class="p-5">
-            <h2 class="font-bold text-lg text-gray-800 dark:text-white truncate">
+            <h2 class="font-bold text-lg text-gray-800 truncate">
                 {{ product.name }}
             </h2>
 

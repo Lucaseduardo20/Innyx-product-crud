@@ -8,7 +8,6 @@ import { useProductStore } from '@/stores/product'
 import type { Product } from '@/types/product'
 import { toast } from 'vue3-toastify'
 import DeleteProductModal from '@/components/products/DeleteProductModal.vue'
-import { deleteProduct } from '@/services/product'
 import ProductViewModal from '@/components/products/ProductViewModal.vue'
 
 const store = useProductStore()
@@ -33,29 +32,28 @@ const closeModal = () => {
 }
 
 const handleSave = async ({ payload, isEdit, id }: any) => {
-    console.log(selectedProduct.value);
     if (isEdit && id) {
-        return await store.updateProduct(id, payload).then((res) => {
+        return await store.updateProduct(id, payload).then(() => {
             toast.success('Produto atualizado com sucesso!')
             closeModal()
-        }).catch((error) => {
+        }).catch(() => {
             toast.error('Erro ao atualizar o produto!')
-            closeModal();
+            closeModal()
         })
-
     } else {
-        closeModal()
-        toast.success('Produto incluído com sucesso!')
-        await store.addProduct(payload).then((res) => {
+        await store.addProduct(payload).then(() => {
             toast.success('Produto incluído com sucesso!')
             closeModal()
-        }).catch((error) => {
+        }).catch(() => {
             toast.error('Erro ao adicionar o produto!')
-            closeModal();
+            closeModal()
         })
     }
 }
 
+const handleSearchBlur = () => {
+    store.fetchProducts({ page: currentPage.value, search: search.value })
+}
 
 const openDeletingModal = async (product: Product) => {
     deleteModalTrigger.value = true;
@@ -66,7 +64,7 @@ onMounted(() => {
     store.fetchProducts({ page: currentPage.value, search: search.value })
 })
 
-watch([currentPage, search], () => {
+watch(currentPage, () => {
     store.fetchProducts({ page: currentPage.value, search: search.value })
 })
 
@@ -81,9 +79,9 @@ const closeViewModal = () => {
 }
 
 const confirmDelete = async (id: number) => {
-    await store.removeProduct(id).then((res) => {
+    await store.removeProduct(id).then(() => {
         deleteModalTrigger.value = false;
-        toast.info('Produto exluído com sucesso!')
+        toast.info('Produto excluído com sucesso!')
     }).catch((error) => {
         toast.error(error.message ?? 'Erro ao excluir o produto')
     });
@@ -93,7 +91,6 @@ const cancelDelete = () => {
     deleteModalTrigger.value = false;
     deletingProduct.value = null;
 }
-
 </script>
 
 <template>
@@ -109,7 +106,7 @@ const cancelDelete = () => {
 
             <div class="mt-4">
                 <input v-model="search" type="text" placeholder="Buscar produtos..."
-                    class="w-full px-3 py-2 border rounded dark:bg-quaternary-800" />
+                    class="w-full px-3 py-2 border rounded dark:bg-quaternary-800" @blur="handleSearchBlur" />
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
