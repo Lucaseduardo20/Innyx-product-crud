@@ -6,7 +6,7 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     token: null as string | null,
     user: null as Record<string, any> | null,
-    preview: {} as Preview ,
+    preview: {} as Preview,
   }),
   actions: {
     setAuth(token: string, user: any) {

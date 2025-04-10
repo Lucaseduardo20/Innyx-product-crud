@@ -47,7 +47,7 @@
                     <select v-model="form.category_id"
                         class="w-full p-2 border rounded dark:bg-quaternary-800 text-black">
                         <option disabled value="">Selecione uma categoria</option>
-                        <option v-for="category in categories" :key="category.id" :value="category.id">
+                        <option v-for="category in category.categories" :key="category.id" :value="category.id">
                             {{ category.name }}
                         </option>
                     </select>
@@ -74,15 +74,16 @@ import type { Product } from '@/types/product'
 import type { Category } from '@/types/category'
 import { useAuthStore } from '@/stores/auth';
 import Spinner from '../shared/Spinner.vue';
+import { useCategoryStore } from '@/stores/category';
 
 
 const emit = defineEmits(['submit', 'close'])
 const loading = ref(false);
+const category = useCategoryStore();
 
 const props = defineProps<{
     isOpen: boolean
     initialData?: Product | null
-    categories: Category[]
 }>()
 
 const form = reactive({
