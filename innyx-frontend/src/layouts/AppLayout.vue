@@ -46,6 +46,7 @@
             <div class="flex justify-around items-center p-2">
                 <NavLink to="/dashboard" icon="🏠" label="Dashboard" mobile />
                 <NavLink to="/products" icon="📦" label="Produtos" mobile />
+                <NavLink v-if="auth.user?.is_admin" to="/categories" icon="📦" label="Categorias" mobile />
                 <NavLink v-if="auth.user?.is_admin" to="/users" icon="👤" label="Usuários" mobile />
             </div>
         </nav>
