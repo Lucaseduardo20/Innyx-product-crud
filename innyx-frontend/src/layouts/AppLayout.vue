@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen bg-senary-50 dark:bg-quaternary-900">
+    <div class="min-h-screen bg-senary-50">
         <aside class="hidden sm:flex fixed left-0 top-0 h-full w-64 bg-[#1f1231] shadow-lg flex-col z-20">
             <div class="p-6 flex justify-center">
                 <Logo class="h-10" />
@@ -11,7 +11,7 @@
             </nav>
             <div class="p-4 border-t dark:border-quaternary-700">
                 <button @click="logout"
-                    class="w-full flex items-center space-x-3 p-3 rounded-lg text-tertiary-600 dark:text-tertiary hover:bg-senary dark:hover:bg-quaternary-700 transition-all duration-200">
+                    class="w-full flex items-center space-x-3 p-3 rounded-lg text-tertiary-600 dark:text-tertiary hover:bg-senary transition-all duration-200">
                     <span class="text-xl">🚪</span>
                     <span class="font-medium">Sair</span>
                 </button>
@@ -25,8 +25,7 @@
                         Olá, {{ auth.user?.name || 'Usuário' }} 👋
                     </h1>
                     <div class="sm:hidden">
-                        <button @click="logout"
-                            class="text-tertiary-600 dark:text-tertiary font-semibold hover:underline text-sm">
+                        <button @click="logout" class="text-tertiary-600 dark:text-tertiary font-semibold text-sm">
                             Sair
                         </button>
                     </div>
@@ -41,12 +40,11 @@
             </main>
         </div>
 
-        <nav
-            class="fixed bottom-0 left-0 right-0 bg-[#1f1231] shadow-inner border-t dark:border-quaternary-700 sm:hidden">
+        <nav class="fixed bottom-0 left-0 right-0 bg-[#1f1231] shadow-inner border-t sm:hidden">
             <div class="flex justify-around items-center p-2">
                 <NavLink to="/dashboard" icon="🏠" label="Dashboard" mobile />
                 <NavLink to="/products" icon="📦" label="Produtos" mobile />
-                <NavLink v-if="auth.user?.is_admin" to="/categories" icon="📦" label="Categorias" mobile />
+                <!-- <NavLink v-if="auth.user?.is_admin" to="/categories" icon="📦" label="Categorias" mobile /> -->
                 <NavLink v-if="auth.user?.is_admin" to="/users" icon="👤" label="Usuários" mobile />
             </div>
         </nav>
