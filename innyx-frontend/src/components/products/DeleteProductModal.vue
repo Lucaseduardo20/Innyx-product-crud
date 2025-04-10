@@ -16,7 +16,7 @@
                 </button>
 
                 <button type="submit" @click="handleDelete"
-                    class="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition">
+                    class="px-4 py-2 w-24 flex items-center justify-center rounded-lg bg-red-600 text-white hover:bg-red-700 transition">
                     <Spinner :loading="loading" />
                     {{ loading ? '' : 'Confirmar' }}
                 </button>
