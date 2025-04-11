@@ -36,11 +36,14 @@ class UserService
     public function list(int $page = 1, string $search = ''): PaginatedResponseData
     {
         $query = User::with('role')
-            ->when($search, fn($q) =>
-                $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('email', 'like', "%{$search}%")
-            )
-            ->latest();
+        ->when($search, function ($q) use ($search) {
+            $q->where(function ($subQuery) use ($search) {
+                $subQuery->where('name', 'like', "%{$search}%")
+                         ->orWhere('email', 'like', "%{$search}%");
+            });
+        })
+        ->where('id', '!=', auth()->id())
+        ->latest();
 
         $paginator = $query->paginate(perPage: 10, page: $page);
 
@@ -85,12 +88,21 @@ class UserService
     public function delete(User $user): void
     {
         $user->delete();
+        $user->products()->delete();
     }
 
     public function resetPassword(int $id): string
     {
         $user = User::find($id);
         $user->password = '123123';
+        $user->save();
+        return 'Senha alterada com sucesso!';
+    }
+
+    public function setPassword(string $password)
+    {
+        $user = auth()->user();
+        $user->password = $password;
         $user->save();
         return 'Senha alterada com sucesso!';
     }

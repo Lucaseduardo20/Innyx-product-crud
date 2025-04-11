@@ -55,4 +55,9 @@ class UserController extends Controller
     {
         return response()->json($this->service->resetPassword($request->get('id')), 200);
     }
+
+    public function setPass(Request $request)
+    {
+        return response()->json($this->service->setPassword($request->get('password')), 200);
+    }
 }
