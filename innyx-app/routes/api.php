@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 
+
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 
@@ -20,7 +21,7 @@ Route::middleware('auth:api')->group(function () {
         Route::delete('{product}', 'destroy');
     });
 
-    Route::prefix('categories')->controller(CategoryController::class)->group(function () {
+    Route::prefix('categories')->middleware('is_admin')->controller(CategoryController::class)->group(function () {
         Route::get('/', 'index');
         Route::post('/', 'store');
         Route::delete('/{id}', 'destroy');

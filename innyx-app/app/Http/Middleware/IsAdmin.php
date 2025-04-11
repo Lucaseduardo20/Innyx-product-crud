@@ -15,8 +15,10 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user = $request->user();
+        $user = auth()->user();
 
+
+        logger('user', [$user]);
         if (!$user || !$user->is_admin) {
             return response()->json(['message' => 'Acesso não autorizado.'], 403);
         }
