@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
-import { getUsers, createUser, updateUser, deleteUser, resetPasswordService } from '@/services/user'
-import type { User } from '@/types/user'
+import { getUsers, createUser, updateUser, deleteUser, resetPasswordService, changePasswordService } from '@/services/user'
+import type { User, ChangePasswordType } from '@/types/user'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -40,6 +40,9 @@ export const useUserStore = defineStore('user', {
     },
     async resetPassword(id: number) {
       return await resetPasswordService(id);
+    },
+    async changePassword(payload: ChangePasswordType) {
+      return await changePasswordService(payload);
     }
   }
 })

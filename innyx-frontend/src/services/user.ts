@@ -1,5 +1,5 @@
 import { api } from './api'
-import type { User } from '@/types/user'
+import type { ChangePasswordType, User } from '@/types/user'
 
 interface PaginatedUserResponse {
     items: User[]
@@ -39,4 +39,8 @@ export async function deleteUser(id: number): Promise<void> {
 
 export async function resetPasswordService(id: number) {
     return await api.post('/users/reset_password', { id })
+}
+
+export async function changePasswordService(data: ChangePasswordType) {
+    return await api.post('/users/change_password', data)
 }

@@ -11,3 +11,8 @@ export type Preview = {
     products: number,
     last_updated: string
 }
+
+export type ChangePasswordType = {
+    currentPassword: string,
+    newPassword: string,
+}
