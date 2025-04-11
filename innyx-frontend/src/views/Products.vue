@@ -125,9 +125,15 @@ const categoriesClose = () => {
                     class="w-full px-3 py-2 border rounded dark:bg-quaternary-800" @blur="handleSearchBlur" />
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+
+            <div v-if="store.products.length > 0" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
                 <ProductCard v-for="product in store.products" :key="product.id" :product="product" @edit="openModal"
                     @delete="openDeletingModal" @view="handleView" />
+            </div>
+
+            <div v-else
+                class="py-10 w-full h-full flex items-center justify-center text-gray-400 dark:text-quaternary-300 text-sm italic">
+                Não há produtos cadastrados.
             </div>
 
             <Pagination v-if="store.pagination.total > 10" :page="store.pagination.current_page"

@@ -98,9 +98,14 @@ watch([currentPage, search], () => {
                     placeholder="Buscar usuários..." class="w-full px-3 py-2 border rounded dark:bg-quaternary-800" />
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+            <div v-if="store.users.length > 0" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
                 <UserCard v-for="user in store.users" @reset="handleResetPassword" :key="user.id" :user="user"
                     @edit="openModal" @delete="openDeleteModal" />
+            </div>
+
+            <div v-else
+                class="py-10 w-full h-full flex items-center justify-center text-gray-400 dark:text-quaternary-300 text-sm italic">
+                Não há usuário cadastrados.
             </div>
 
             <Pagination v-if="store.pagination.total > 10" :page="store.pagination.current_page"
