@@ -56,8 +56,9 @@ class UserController extends Controller
         return response()->json($this->service->resetPassword($request->get('id')), 200);
     }
 
-    public function setPass(Request $request)
+    public function changePass(Request $request)
     {
-        return response()->json($this->service->setPassword($request->get('password')), 200);
+        $response = $this->service->setPassword($request->all());
+        return response()->json($response['message'], $response['status']);
     }
 }

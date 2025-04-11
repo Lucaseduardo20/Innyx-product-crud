@@ -9,6 +9,7 @@ use App\Models\Role;
 use App\Data\Auth\UserData;
 use App\Data\Shared\PaginatedResponseData;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
@@ -99,11 +100,20 @@ class UserService
         return 'Senha alterada com sucesso!';
     }
 
-    public function setPassword(string $password)
+    public function setPassword(array $data)
     {
         $user = auth()->user();
-        $user->password = $password;
+
+        if(!Hash::check($data['currentPassword'], $user->password)) {
+            return ['status' => 404, 'message' => 'Senha atual incorreta!'];
+        }
+
+        if (Hash::check($data['newPassword'], $user->password)) {
+            return ['status' => 400, 'message' => 'A nova senha não pode ser igual à atual.'];
+        }
+
+        $user->password = Hash::make($data['newPassword']);
         $user->save();
-        return 'Senha alterada com sucesso!';
+        return ['status' => 200, 'message' => 'Senha alterada com sucesso!'];;
     }
 }
