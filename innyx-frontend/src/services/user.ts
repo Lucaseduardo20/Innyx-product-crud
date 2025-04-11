@@ -36,3 +36,7 @@ export async function updateUser(id: number, payload: Omit<User, 'id'>): Promise
 export async function deleteUser(id: number): Promise<void> {
     await api.delete(`/users/${id}`)
 }
+
+export async function resetPasswordService(id: number) {
+    return await api.post('/users/reset_password', { id })
+}

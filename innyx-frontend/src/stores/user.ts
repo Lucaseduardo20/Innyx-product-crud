@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { getUsers, createUser, updateUser, deleteUser } from '@/services/user'
+import { getUsers, createUser, updateUser, deleteUser, resetPasswordService } from '@/services/user'
 import type { User } from '@/types/user'
 
 export const useUserStore = defineStore('user', {
@@ -37,6 +37,9 @@ export const useUserStore = defineStore('user', {
     async removeUser(id: number) {
       await deleteUser(id)
       this.users = this.users.filter(user => user.id !== id)
+    },
+    async resetPassword(id: number) {
+      return await resetPasswordService(id);
     }
   }
 })

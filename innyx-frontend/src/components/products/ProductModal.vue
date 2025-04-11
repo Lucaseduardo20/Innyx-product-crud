@@ -37,7 +37,7 @@
                         Imagem do Produto
                     </label>
                     <input type="file" accept="image/*" @change="onFileChange"
-                        class="block w-full text-sm text-gray-900 text-black file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/80" />
+                        class="block w-full text-sm text-black file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/80" />
                 </div>
 
                 <div>

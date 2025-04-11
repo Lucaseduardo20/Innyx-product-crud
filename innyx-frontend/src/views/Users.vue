@@ -63,6 +63,16 @@ const cancelDelete = () => {
     deleteModalTrigger.value = false
 }
 
+const handleResetPassword = async (id: number) => {
+    const response = await store.resetPassword(id);
+    console.log(response);
+    if (response.status !== 200) {
+        return toast.error('Erro ao resetar a senha do usuário');
+    }
+
+    toast.success('Senha resetada, a nova senha é "123123"');
+}
+
 onMounted(() => {
     store.fetchUsers({ page: currentPage.value, search: search.value })
 })
@@ -89,8 +99,8 @@ watch([currentPage, search], () => {
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-                <UserCard v-for="user in store.users" :key="user.id" :user="user" @edit="openModal"
-                    @delete="openDeleteModal" />
+                <UserCard v-for="user in store.users" @reset="handleResetPassword" :key="user.id" :user="user"
+                    @edit="openModal" @delete="openDeleteModal" />
             </div>
 
             <Pagination v-if="store.pagination.total > 10" :page="store.pagination.current_page"
