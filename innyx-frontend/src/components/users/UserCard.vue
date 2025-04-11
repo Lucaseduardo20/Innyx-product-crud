@@ -6,7 +6,6 @@ const props = defineProps<{ user: User }>()
 const emit = defineEmits(['edit', 'delete', 'reset'])
 const loadingReset = ref<boolean>(false)
 
-console.log(props.user);
 
 const handleResetPassword = () => {
     loadingReset.value = true;

@@ -65,7 +65,6 @@ const cancelDelete = () => {
 
 const handleResetPassword = async (id: number) => {
     const response = await store.resetPassword(id);
-    console.log(response);
     if (response.status !== 200) {
         return toast.error('Erro ao resetar a senha do usuário');
     }
