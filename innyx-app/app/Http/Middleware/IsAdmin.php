@@ -18,7 +18,6 @@ class IsAdmin
         $user = auth()->user();
 
 
-        logger('user', [$user]);
         if (!$user || !$user->is_admin) {
             return response()->json(['message' => 'Acesso não autorizado.'], 403);
         }

@@ -32,6 +32,7 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/', [UserController::class, 'store']);
         Route::put('/{user}', [UserController::class, 'update']);
         Route::delete('/{user}', [UserController::class, 'destroy']);
+        Route::post('/reset_password', [UserController::class, 'resetPass']);
     });
 
 });

@@ -86,4 +86,12 @@ class UserService
     {
         $user->delete();
     }
+
+    public function resetPassword(int $id): string
+    {
+        $user = User::find($id);
+        $user->password = '123123';
+        $user->save();
+        return 'Senha alterada com sucesso!';
+    }
 }

@@ -50,4 +50,9 @@ class UserController extends Controller
         $this->service->delete($user);
         return response()->json([], 204);
     }
+
+    public function resetPass(Request $request)
+    {
+        return response()->json($this->service->resetPassword($request->get('id')), 200);
+    }
 }
